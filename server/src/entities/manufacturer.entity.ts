@@ -1,6 +1,6 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql"
 import { Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn } from "typeorm"
-import { Auction } from "./auction.entity"
+import { Tender } from "./tender.entity"
 import { User } from "./user.entity"
 
 @ObjectType()
@@ -18,7 +18,7 @@ export class Manufacturer extends ManufacturerHollow {
 	@JoinColumn({ name: "userId", referencedColumnName: "id" })
 	asUser: User
 
-	@Field(() => [Auction])
-	@OneToMany(() => Auction, ({ manager }) => manager)
-	auctionsManaged: Auction[]
+	@Field(() => [Tender])
+	@OneToMany(() => Tender, ({ manager }) => manager)
+	auctionsManaged: Tender[]
 }

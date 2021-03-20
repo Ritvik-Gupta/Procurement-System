@@ -1,5 +1,6 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql"
 import { Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn } from "typeorm"
+import { TenderQuote } from "./tender-quote.entity"
 import { Product } from "./product.entity"
 import { User } from "./user.entity"
 
@@ -21,4 +22,8 @@ export class Vendor extends VendorHollow {
 	@Field(() => [Product])
 	@OneToMany(() => Product, ({ creator }) => creator)
 	productsCreated: Product[]
+
+	@Field(() => [TenderQuote])
+	@OneToMany(() => TenderQuote, ({ vendor }) => vendor)
+	bids: TenderQuote[]
 }

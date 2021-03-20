@@ -10,14 +10,14 @@ import {
 	PrimaryGeneratedColumn,
 	Unique,
 } from "typeorm"
-import { AuctionBid } from "./auction-bid.entity"
+import { TenderQuote } from "./tender-quote.entity"
 import { Manufacturer } from "./manufacturer.entity"
 import { Material } from "./material.entity"
 
 @ObjectType()
-@Unique("Unique-Auction", ["managerId", "materialName", "createDate"])
+@Unique("Unique-Tender", ["managerId", "materialName", "createDate"])
 @Check("duration > 0")
-export class AuctionHollow {
+export class TenderHollow {
 	@Field(() => ID)
 	@PrimaryGeneratedColumn("uuid")
 	auctionId: string
@@ -46,7 +46,7 @@ export class AuctionHollow {
 
 @ObjectType()
 @Entity()
-export class Auction extends AuctionHollow {
+export class Tender extends TenderHollow {
 	@Field(() => Manufacturer)
 	@ManyToOne(() => Manufacturer, ({ auctionsManaged }) => auctionsManaged)
 	@JoinColumn({ name: "managerId", referencedColumnName: "userId" })
@@ -57,7 +57,7 @@ export class Auction extends AuctionHollow {
 	@JoinColumn({ name: "materialName", referencedColumnName: "name" })
 	forMaterial: Material
 
-	@Field(() => [AuctionBid])
-	@OneToMany(() => AuctionBid, ({ forAuction }) => forAuction)
-	bidsPlaced: AuctionBid[]
+	@Field(() => [TenderQuote])
+	@OneToMany(() => TenderQuote, ({ forTender }) => forTender)
+	quotations: TenderQuote[]
 }

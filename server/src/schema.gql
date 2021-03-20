@@ -5,7 +5,7 @@
 type Material {
   name: ID!
   usedForProducts: [Product!]!
-  heldAuctions: [Auction!]!
+  heldAuctions: [Tender!]!
 }
 
 type Product {
@@ -25,6 +25,7 @@ type Vendor {
   userId: ID!
   asUser: User!
   productsCreated: [Product!]!
+  bids: [TenderQuote!]!
 }
 
 type User {
@@ -39,10 +40,10 @@ type User {
 type Manufacturer {
   userId: ID!
   asUser: User!
-  auctionsManaged: [Auction!]!
+  auctionsManaged: [Tender!]!
 }
 
-type Auction {
+type Tender {
   auctionId: ID!
   managerId: String!
   materialName: String!
@@ -51,12 +52,12 @@ type Auction {
   endDate: DateTime!
   manager: Manufacturer!
   forMaterial: Material!
-  bidsPlaced: [AuctionBid!]!
+  quotations: [TenderQuote!]!
 }
 
-type AuctionBid {
-  bidId: ID!
-  auctionId: String!
+type TenderQuote {
+  auctioneerId: ID!
+  auctionId: ID!
   amount: Int!
 }
 

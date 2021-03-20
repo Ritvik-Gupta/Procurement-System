@@ -1,6 +1,6 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql"
 import { Entity, OneToMany, PrimaryColumn } from "typeorm"
-import { Auction } from "./auction.entity"
+import { Tender } from "./tender.entity"
 import { Product } from "./product.entity"
 
 @ObjectType()
@@ -17,7 +17,7 @@ export class Material extends MaterialHollow {
 	@OneToMany(() => Product, ({ createdMaterial }) => createdMaterial)
 	usedForProducts: Product[]
 
-	@Field(() => [Auction])
-	@OneToMany(() => Auction, ({ forMaterial }) => forMaterial)
-	heldAuctions: Auction[]
+	@Field(() => [Tender])
+	@OneToMany(() => Tender, ({ forMaterial }) => forMaterial)
+	heldAuctions: Tender[]
 }

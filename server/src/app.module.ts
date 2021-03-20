@@ -3,7 +3,7 @@ import { GraphQLModule } from "@nestjs/graphql"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { AppController } from "./app.controller"
 import { AppService } from "./app.service"
-import { Auction, AuctionBid, Manufacturer, Material, Product, User, Vendor } from "./entities"
+import { Tender, TenderQuote, Manufacturer, Material, Product, User, Vendor } from "./entities"
 import { ProductModule } from "./product/product.module"
 import { ENV, gqlFormatError, IContext } from "./services"
 
@@ -14,7 +14,7 @@ import { ENV, gqlFormatError, IContext } from "./services"
 			url: ENV.DATABASE_URL,
 			synchronize: !ENV.IN_PRODUCTION,
 			logging: !ENV.IN_PRODUCTION,
-			entities: [Manufacturer, Material, Product, User, Vendor, Auction, AuctionBid],
+			entities: [Manufacturer, Material, Product, User, Vendor, Tender, TenderQuote],
 		}),
 		GraphQLModule.forRoot({
 			autoSchemaFile: ENV.IN_PRODUCTION || "./src/schema.gql",

@@ -1,5 +1,5 @@
-export * from "./auction-bid.entity"
-export * from "./auction.entity"
+export * from "./tender-quote.entity"
+export * from "./tender.entity"
 export * from "./manufacturer.entity"
 export * from "./material.entity"
 export * from "./product.entity"
