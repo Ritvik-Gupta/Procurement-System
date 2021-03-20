@@ -8,25 +8,29 @@ import { Vendor } from "./vendor.entity"
 export class TenderQuoteHollow {
 	@Field(() => ID)
 	@PrimaryColumn({ type: "uuid" })
-	auctioneerId: string
+	vendorId: string
 
 	@Field(() => ID)
 	@PrimaryColumn({ type: "uuid" })
-	auctionId: string
+	tenderId: string
 
 	@Field(() => Int)
 	@Column({ type: "integer" })
 	amount: number
+
+	@Field(() => Boolean)
+	@Column({ type: "boolean" })
+	deliveredByVendor: boolean
 }
 
 @ObjectType()
 @Entity()
 export class TenderQuote extends TenderQuoteHollow {
 	@ManyToOne(() => Tender, ({ quotations }) => quotations)
-	@JoinColumn({ name: "auctionId", referencedColumnName: "auctionId" })
+	@JoinColumn({ name: "tenderId", referencedColumnName: "tenderId" })
 	forTender: Tender
 
 	@ManyToOne(() => Vendor, ({ bids }) => bids)
-	@JoinColumn({ name: "auctioneerId", referencedColumnName: "userId" })
+	@JoinColumn({ name: "vendorId", referencedColumnName: "userId" })
 	vendor: Vendor
 }

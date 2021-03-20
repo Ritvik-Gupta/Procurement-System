@@ -6,6 +6,8 @@ import { AppService } from "./app.service"
 import { Tender, TenderQuote, Manufacturer, Material, Product, User, Vendor } from "./entities"
 import { ProductModule } from "./product/product.module"
 import { ENV, gqlFormatError, IContext } from "./services"
+import { UserModule } from './user/user.module';
+import { ManufacturerModule } from './manufacturer/manufacturer.module';
 
 @Module({
 	imports: [
@@ -23,6 +25,8 @@ import { ENV, gqlFormatError, IContext } from "./services"
 			playground: !ENV.IN_PRODUCTION,
 		}),
 		ProductModule,
+		UserModule,
+		ManufacturerModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],

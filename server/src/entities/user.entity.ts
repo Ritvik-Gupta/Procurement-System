@@ -24,7 +24,7 @@ export class UserHollow implements IAuthUser {
 	@Column({ type: "varchar", length: 100, unique: true })
 	email: string
 
-	@Column({ type: "text" })
+	@Column({ type: "varchar" })
 	password: string
 
 	@Field()

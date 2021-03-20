@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql"
-import { Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn } from "typeorm"
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn } from "typeorm"
 import { Tender } from "./tender.entity"
 import { User } from "./user.entity"
 
@@ -8,6 +8,10 @@ export class ManufacturerHollow {
 	@Field(() => ID)
 	@PrimaryColumn({ type: "uuid" })
 	userId: string
+
+	@Field()
+	@Column({ type: "varchar" })
+	companyName: string
 }
 
 @ObjectType()

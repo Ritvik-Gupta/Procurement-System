@@ -11,21 +11,25 @@ type Material {
 type Product {
   creatorId: ID!
   materialName: ID!
-  createDat: DateTime!
   creator: Vendor!
   createdMaterial: Material!
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
 type Vendor {
   userId: ID!
+  companyName: String
   asUser: User!
   productsCreated: [Product!]!
   bids: [TenderQuote!]!
+}
+
+type UserHollow {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  role: String!
+  accessToken: String!
 }
 
 type User {
@@ -39,15 +43,17 @@ type User {
 
 type Manufacturer {
   userId: ID!
+  companyName: String!
   asUser: User!
   auctionsManaged: [Tender!]!
 }
 
 type Tender {
-  auctionId: ID!
+  tenderId: ID!
   managerId: String!
   materialName: String!
-  createDate: DateTime!
+  description: String!
+  startDate: DateTime!
   duration: Int!
   endDate: DateTime!
   manager: Manufacturer!
@@ -55,12 +61,41 @@ type Tender {
   quotations: [TenderQuote!]!
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type TenderQuote {
-  auctioneerId: ID!
-  auctionId: ID!
+  vendorId: ID!
+  tenderId: ID!
   amount: Int!
+  deliveredByVendor: Boolean!
 }
 
 type Query {
   getAllProducts: [Product!]!
+  getAllUsers: [User!]!
+  currentUser: User
+}
+
+type Mutation {
+  login(loginInput: UserLoginInput!): UserHollow!
+  registerManufacturer(userInput: UserInput!, manufacturerInput: ManufacturerInput!): UserHollow!
+}
+
+input UserLoginInput {
+  email: String!
+  password: String!
+}
+
+input UserInput {
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+}
+
+input ManufacturerInput {
+  companyName: String!
 }

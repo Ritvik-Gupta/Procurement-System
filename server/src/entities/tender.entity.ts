@@ -2,7 +2,6 @@ import { Field, ID, Int, ObjectType } from "@nestjs/graphql"
 import {
 	Check,
 	Column,
-	CreateDateColumn,
 	Entity,
 	JoinColumn,
 	ManyToOne,
@@ -10,17 +9,17 @@ import {
 	PrimaryGeneratedColumn,
 	Unique,
 } from "typeorm"
-import { TenderQuote } from "./tender-quote.entity"
 import { Manufacturer } from "./manufacturer.entity"
 import { Material } from "./material.entity"
+import { TenderQuote } from "./tender-quote.entity"
 
 @ObjectType()
-@Unique("Unique-Tender", ["managerId", "materialName", "createDate"])
-@Check("duration > 0")
+@Unique("Unique-Tender", ["managerId", "materialName", "startDate"])
+@Check("duration > 0 AND duration <= 365")
 export class TenderHollow {
 	@Field(() => ID)
 	@PrimaryGeneratedColumn("uuid")
-	auctionId: string
+	tenderId: string
 
 	@Field()
 	@Column({ type: "uuid" })
@@ -31,16 +30,20 @@ export class TenderHollow {
 	materialName: string
 
 	@Field()
-	@CreateDateColumn()
-	createDate: Date
+	@Column({ type: "text" })
+	description: string
+
+	@Field()
+	@Column({ type: "timestamp with time zone" })
+	startDate: Date
 
 	@Field(() => Int)
-	@Column({ type: "integer" })
+	@Column({ type: "smallint" })
 	duration: number
 
 	@Field()
 	get endDate(): Date {
-		return new Date(this.createDate.getTime() + this.duration * 60 * 1000)
+		return new Date(this.startDate.getTime() + this.duration * 24 * 60 * 60 * 1000)
 	}
 }
 

@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql"
-import { CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm"
+import { Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm"
 import { Material } from "./material.entity"
 import { Vendor } from "./vendor.entity"
 
@@ -12,10 +12,6 @@ export class ProductHollow {
 	@Field(() => ID)
 	@PrimaryColumn({ type: "varchar" })
 	materialName: string
-
-	@Field()
-	@CreateDateColumn()
-	createDat: Date
 }
 
 @ObjectType()

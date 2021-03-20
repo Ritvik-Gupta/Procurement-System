@@ -6,12 +6,12 @@ export interface IRepositoryErrors {
 	ifNotDefined: string
 }
 
-export abstract class BaseRepository<T> extends Repository<T> {
+export abstract class BaseRepository<T extends U, U = T> extends Repository<T> {
 	constructor(private readonly repoErrors: IRepositoryErrors) {
 		super()
 	}
 
-	async ifDefined(where: FindConditions<T>): Promise<T> {
+	async ifDefined(where: FindConditions<T>): Promise<U> {
 		const value = await this.findOne({ where })
 		if (value === undefined) throw Error(this.repoErrors.ifNotDefined)
 		return value
@@ -22,8 +22,11 @@ export abstract class BaseRepository<T> extends Repository<T> {
 		if (value.length > 0) throw Error(this.repoErrors.ifDefined)
 	}
 
-	createAndReturn(entity: DeepPartial<T>): Promise<T> {
-		return this.save(this.create(entity))
+	createAndReturn(entity: DeepPartial<T>): Promise<U> {
+		console.log("abc")
+		const user = this.create(entity)
+		console.log(user)
+		return this.save(user)
 	}
 
 	getPopulatedQuery(fieldPath: INormalizedPaths): SelectQueryBuilder<T> {
