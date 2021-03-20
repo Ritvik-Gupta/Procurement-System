@@ -1,0 +1,13 @@
+# Compiled output
+/dist
+/node_modules
+
+# Tests
+/coverage
+
+# Environments
+.env
+
+# Configs
+package-lock.json
+tsconfig.build.json

@@ -1,0 +1,65 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Material {
+  name: ID!
+  usedForProducts: [Product!]!
+  heldAuctions: [Auction!]!
+}
+
+type Product {
+  creatorId: ID!
+  materialName: ID!
+  createDat: DateTime!
+  creator: Vendor!
+  createdMaterial: Material!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Vendor {
+  userId: ID!
+  asUser: User!
+  productsCreated: [Product!]!
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  role: String!
+  accessToken: String!
+}
+
+type Manufacturer {
+  userId: ID!
+  asUser: User!
+  auctionsManaged: [Auction!]!
+}
+
+type Auction {
+  auctionId: ID!
+  managerId: String!
+  materialName: String!
+  createDate: DateTime!
+  duration: Int!
+  endDate: DateTime!
+  manager: Manufacturer!
+  forMaterial: Material!
+  bidsPlaced: [AuctionBid!]!
+}
+
+type AuctionBid {
+  bidId: ID!
+  auctionId: String!
+  amount: Int!
+}
+
+type Query {
+  getAllProducts: [Product!]!
+}
