@@ -30,6 +30,7 @@ export class Proposal extends ProposalHollow {
 	@JoinColumn({ name: "tenderId", referencedColumnName: "tenderId" })
 	forTender: Tender
 
+	@Field(() => Vendor)
 	@ManyToOne(() => Vendor, ({ submittedProposals }) => submittedProposals)
 	@JoinColumn({ name: "proposerId", referencedColumnName: "userId" })
 	proposer: Vendor

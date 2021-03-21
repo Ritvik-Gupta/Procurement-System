@@ -1,6 +1,6 @@
 import { Tender } from "$/entities"
 import { Field, InputType } from "@nestjs/graphql"
-import { IsDate, Length, MinLength } from "class-validator"
+import { IsDate, Max, Min, MinLength } from "class-validator"
 
 @InputType()
 export class TenderInput implements Partial<Tender> {
@@ -9,7 +9,8 @@ export class TenderInput implements Partial<Tender> {
 	startDate: Date
 
 	@Field()
-	@Length(1, 365)
+	@Min(1)
+	@Max(365)
 	duration: number
 
 	@Field()
@@ -17,10 +18,15 @@ export class TenderInput implements Partial<Tender> {
 	agreementStartDate: Date
 
 	@Field()
-	@Length(1, 120)
+	@Min(1)
+	@Max(120)
 	agreementDuration: number
 
 	@Field()
 	@MinLength(5)
 	materialName: string
+
+	@Field()
+	@MinLength(5)
+	description: string
 }

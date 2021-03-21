@@ -1,5 +1,6 @@
 import { Agreement, AgreementHollow } from "$/entities"
-import { Args, Mutation, Resolver } from "@nestjs/graphql"
+import { IContext, INormalizedPaths, Normalize, UseAuthGuard } from "$/services"
+import { Args, Context, Mutation, Query, Resolver } from "@nestjs/graphql"
 import { AgreementService } from "./agreement.service"
 import { AgreementInput } from "./dto/agreement.input"
 
@@ -10,5 +11,14 @@ export class AgreementResolver {
 	@Mutation(() => AgreementHollow)
 	createAgreement(@Args("agreement") agreement: AgreementInput): Promise<AgreementHollow> {
 		return this.agreementService.create(agreement)
+	}
+
+	@Query(() => [Agreement])
+	@UseAuthGuard()
+	fetchX(
+		@Normalize.Paths() fieldPaths: INormalizedPaths,
+		@Context() ctx: IContext
+	): Promise<Agreement[]> {
+		return this.agreementService.fetchX(ctx.user!.id, fieldPaths)
 	}
 }

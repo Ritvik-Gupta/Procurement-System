@@ -14,6 +14,7 @@ type Proposal {
   tenderId: ID!
   amount: Int!
   deliveredByVendor: Boolean!
+  proposer: Vendor!
 }
 
 type MaterialHollow {
@@ -125,6 +126,8 @@ type Query {
   getAllUsers: [User!]!
   currentUser: User
   fetchManufacturer: Manufacturer
+  fetchX: [Agreement!]!
+  fetchTender(tenderId: String!): Tender
 }
 
 type Mutation {
@@ -175,6 +178,7 @@ input TenderInput {
   agreementStartDate: DateTime!
   agreementDuration: Float!
   materialName: String!
+  description: String!
 }
 
 input ProposalInput {
