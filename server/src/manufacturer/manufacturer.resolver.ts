@@ -1,6 +1,7 @@
 import { Manufacturer, UserHollow } from "$/entities"
+import { IContext, INormalizedPaths, Normalize, UseAuthGuard } from "$/services"
 import { UserInput } from "$/user/dto/user.input"
-import { Args, Mutation, Resolver } from "@nestjs/graphql"
+import { Args, Context, Mutation, Query, Resolver } from "@nestjs/graphql"
 import { ManufacturerInput } from "./dto/manufactuer.input"
 import { ManufacturerService } from "./manufacturer.service"
 
@@ -14,5 +15,14 @@ export class ManufacturerResolver {
 		@Args("user") userInput: UserInput
 	): Promise<UserHollow> {
 		return this.manufacturerService.register(manufacturerInput, userInput)
+	}
+
+	@Query(() => Manufacturer, { nullable: true })
+	@UseAuthGuard()
+	fetchManufacturer(
+		@Context() context: IContext,
+		@Normalize.Paths() fieldPaths: INormalizedPaths
+	): Promise<Manufacturer | undefined> {
+		return this.manufacturerService.fetch(context.user!.id, fieldPaths)
 	}
 }

@@ -1,0 +1,6 @@
+query FetchManufacturer {
+	fetchManufacturer {
+		userId
+		companyName
+	}
+}

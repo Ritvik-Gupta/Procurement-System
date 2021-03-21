@@ -124,6 +124,7 @@ type Query {
   getAllProducts: [Product!]!
   getAllUsers: [User!]!
   currentUser: User
+  fetchManufacturer: Manufacturer
 }
 
 type Mutation {
