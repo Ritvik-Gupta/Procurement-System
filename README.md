@@ -16,40 +16,41 @@ We automatically embed agreement once the auction room is closed using blockchai
 
 ## Getting Started
 
-Run *npm install* to install all the npm dependencies
+Change Directory into the Server and Client Folder and run *npm install* to install all the npm dependencies
 
 ```bash
 
-npm install
+cd server && npm install
+cd client && npm install
 
 ```
 
 
 ## Client Terminal
 
-In the client terminal type *npm run dev* for development mode server on PORT 3000
+In the client terminal run *npm run build* to build the project and compile into the *.next* folder. Then run *npm run start* to start the production mode server on PORT 3000
 
-First, run the development server:
 
 ```bash
 
-npm run dev
+npm run build
+npm run start
 
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+
 ## Server Terminal
 
-
-In the server terminal type *npm run start:dev* for development mode server on PORT 4000
+In the server terminal run *npm run build* to build the project and compile into the *build* folder. Then run *npm run start:prod* to start the production mode server on PORT 4000
 
 ```bash
 
-npm run start:dev
+npm run build
+npm run start:prod
 
 ```
-
 
 Open [http://localhost:4000](http://localhost:4000) with your browser to see the result.
 
