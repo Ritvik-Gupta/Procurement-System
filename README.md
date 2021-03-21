@@ -4,13 +4,13 @@ Procurely is a one-stop solution for manufacturers and vendors to perform their 
 
 Other features include vendor rating and agreement history, customized RFP(request for proposal), and the whole process of procurement on one platform which will drastically reduce the time taken for each agreement.
 
-- *How time is reduced?* -<br/>
+- *How time is reduced?* <br/>
 With all stakeholders on our website , and filtering algorithm used, time reduces to auction room time.
 
-- *Our x factor* -<br/>
+- *Our x factor* <br/>
 We automatically provide manufacturer with the best offer suitable for its requirement in no time
 
-- *Scope of improvement* -<br/>
+- *Scope of improvement* <br/>
 We automatically embed agreement once the auction room is closed using blockchain
 
 
