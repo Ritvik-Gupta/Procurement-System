@@ -1,13 +1,17 @@
 import { Module } from "@nestjs/common"
 import { GraphQLModule } from "@nestjs/graphql"
 import { TypeOrmModule } from "@nestjs/typeorm"
+import { AgreementModule } from "./agreement/agreement.module"
 import { AppController } from "./app.controller"
 import { AppService } from "./app.service"
-import { Tender, TenderQuote, Manufacturer, Material, Product, User, Vendor } from "./entities"
+import { ManufacturerModule } from "./manufacturer/manufacturer.module"
+import { MaterialModule } from "./material/material.module"
 import { ProductModule } from "./product/product.module"
+import { ProposalModule } from "./proposal/proposal.module"
 import { ENV, gqlFormatError, IContext } from "./services"
-import { UserModule } from './user/user.module';
-import { ManufacturerModule } from './manufacturer/manufacturer.module';
+import { TenderModule } from "./tender/tender.module"
+import { UserModule } from "./user/user.module"
+import { VendorModule } from "./vendor/vendor.module"
 
 @Module({
 	imports: [
@@ -16,7 +20,7 @@ import { ManufacturerModule } from './manufacturer/manufacturer.module';
 			url: ENV.DATABASE_URL,
 			synchronize: !ENV.IN_PRODUCTION,
 			logging: !ENV.IN_PRODUCTION,
-			entities: [Manufacturer, Material, Product, User, Vendor, Tender, TenderQuote],
+			autoLoadEntities: true,
 		}),
 		GraphQLModule.forRoot({
 			autoSchemaFile: ENV.IN_PRODUCTION || "./src/schema.gql",
@@ -27,6 +31,11 @@ import { ManufacturerModule } from './manufacturer/manufacturer.module';
 		ProductModule,
 		UserModule,
 		ManufacturerModule,
+		VendorModule,
+		AgreementModule,
+		TenderModule,
+		ProposalModule,
+		MaterialModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],

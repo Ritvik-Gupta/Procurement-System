@@ -1,0 +1,10 @@
+{
+	"overwrite": true,
+	"schema": "../server/src/schema.gql",
+	"documents": "./graphql/**/*.gql",
+	"generates": {
+		"graphql/generated.tsx": {
+			"plugins": ["typescript", "typescript-operations", "typescript-react-apollo"]
+		}
+	}
+}

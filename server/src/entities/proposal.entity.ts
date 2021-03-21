@@ -5,10 +5,10 @@ import { Vendor } from "./vendor.entity"
 
 @ObjectType()
 @Check("amount > 0")
-export class TenderQuoteHollow {
+export class ProposalHollow {
 	@Field(() => ID)
 	@PrimaryColumn({ type: "uuid" })
-	vendorId: string
+	proposerId: string
 
 	@Field(() => ID)
 	@PrimaryColumn({ type: "uuid" })
@@ -18,19 +18,19 @@ export class TenderQuoteHollow {
 	@Column({ type: "integer" })
 	amount: number
 
-	@Field(() => Boolean)
+	@Field()
 	@Column({ type: "boolean" })
 	deliveredByVendor: boolean
 }
 
 @ObjectType()
 @Entity()
-export class TenderQuote extends TenderQuoteHollow {
-	@ManyToOne(() => Tender, ({ quotations }) => quotations)
+export class Proposal extends ProposalHollow {
+	@ManyToOne(() => Tender, ({ proposals }) => proposals)
 	@JoinColumn({ name: "tenderId", referencedColumnName: "tenderId" })
 	forTender: Tender
 
-	@ManyToOne(() => Vendor, ({ bids }) => bids)
-	@JoinColumn({ name: "vendorId", referencedColumnName: "userId" })
-	vendor: Vendor
+	@ManyToOne(() => Vendor, ({ submittedProposals }) => submittedProposals)
+	@JoinColumn({ name: "proposerId", referencedColumnName: "userId" })
+	proposer: Vendor
 }

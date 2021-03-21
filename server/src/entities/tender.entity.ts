@@ -6,16 +6,19 @@ import {
 	JoinColumn,
 	ManyToOne,
 	OneToMany,
+	OneToOne,
 	PrimaryGeneratedColumn,
 	Unique,
 } from "typeorm"
+import { Agreement } from "./agreement.entity"
 import { Manufacturer } from "./manufacturer.entity"
 import { Material } from "./material.entity"
-import { TenderQuote } from "./tender-quote.entity"
+import { Proposal } from "./proposal.entity"
 
 @ObjectType()
 @Unique("Unique-Tender", ["managerId", "materialName", "startDate"])
-@Check("duration > 0 AND duration <= 365")
+@Check(`"duration" > 0 AND "duration" <= 365`)
+@Check(`"agreementDuration" > 0 AND "agreementDuration" <= 120`)
 export class TenderHollow {
 	@Field(() => ID)
 	@PrimaryGeneratedColumn("uuid")
@@ -45,6 +48,14 @@ export class TenderHollow {
 	get endDate(): Date {
 		return new Date(this.startDate.getTime() + this.duration * 24 * 60 * 60 * 1000)
 	}
+
+	@Field()
+	@Column({ type: "timestamp with time zone" })
+	agreementStartDate: Date
+
+	@Field(() => Int)
+	@Column({ type: "smallint" })
+	agreementDuration: number
 }
 
 @ObjectType()
@@ -60,7 +71,10 @@ export class Tender extends TenderHollow {
 	@JoinColumn({ name: "materialName", referencedColumnName: "name" })
 	forMaterial: Material
 
-	@Field(() => [TenderQuote])
-	@OneToMany(() => TenderQuote, ({ forTender }) => forTender)
-	quotations: TenderQuote[]
+	@Field(() => [Proposal])
+	@OneToMany(() => Proposal, ({ forTender }) => forTender)
+	proposals: Proposal[]
+
+	@OneToOne(() => Agreement, ({ withTender }) => withTender)
+	agreementFormed: Agreement
 }

@@ -23,7 +23,7 @@ export class UserResolver {
 	}
 
 	@Mutation(() => UserHollow)
-	login(@Args("loginInput") loginInput: UserLoginInput): Promise<UserHollow> {
-		return this.userService.login(loginInput)
+	login(@Args("login") login: UserLoginInput): Promise<UserHollow> {
+		return this.userService.login(login)
 	}
 }

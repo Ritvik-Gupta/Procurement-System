@@ -10,8 +10,8 @@ export class ManufacturerResolver {
 
 	@Mutation(() => UserHollow)
 	registerManufacturer(
-		@Args("manufacturerInput") manufacturerInput: ManufacturerInput,
-		@Args("userInput") userInput: UserInput
+		@Args("manufacturer") manufacturerInput: ManufacturerInput,
+		@Args("user") userInput: UserInput
 	): Promise<UserHollow> {
 		return this.manufacturerService.register(manufacturerInput, userInput)
 	}

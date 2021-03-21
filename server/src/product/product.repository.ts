@@ -5,6 +5,6 @@ import { EntityRepository } from "typeorm"
 @EntityRepository(Product)
 export class ProductRepository extends BaseRepository<Product, ProductHollow> {
 	constructor() {
-		super({ ifDefined: "Product is already Defined", ifNotDefined: "Product is not Defined" })
+		super({ ifDefined: "Product has already been Created", ifNotDefined: "Product not found" })
 	}
 }

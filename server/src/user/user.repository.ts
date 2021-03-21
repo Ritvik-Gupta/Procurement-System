@@ -5,6 +5,9 @@ import { EntityRepository } from "typeorm"
 @EntityRepository(User)
 export class UserRepository extends BaseRepository<User, UserHollow> {
 	constructor() {
-		super({ ifDefined: "User has already been Registered", ifNotDefined: "No such User exists" })
+		super({
+			ifDefined: "A User has already Registered with the email",
+			ifNotDefined: "No such User exists",
+		})
 	}
 }

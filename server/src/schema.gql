@@ -2,10 +2,33 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type ProposalHollow {
+  proposerId: ID!
+  tenderId: ID!
+  amount: Int!
+  deliveredByVendor: Boolean!
+}
+
+type Proposal {
+  proposerId: ID!
+  tenderId: ID!
+  amount: Int!
+  deliveredByVendor: Boolean!
+}
+
+type MaterialHollow {
+  name: ID!
+}
+
 type Material {
   name: ID!
   usedForProducts: [Product!]!
   heldAuctions: [Tender!]!
+}
+
+type ProductHollow {
+  creatorId: ID!
+  materialName: ID!
 }
 
 type Product {
@@ -20,7 +43,8 @@ type Vendor {
   companyName: String
   asUser: User!
   productsCreated: [Product!]!
-  bids: [TenderQuote!]!
+  submittedProposals: [Proposal!]!
+  acceptedAgreements: [Agreement!]!
 }
 
 type UserHollow {
@@ -48,6 +72,23 @@ type Manufacturer {
   auctionsManaged: [Tender!]!
 }
 
+type TenderHollow {
+  tenderId: ID!
+  managerId: String!
+  materialName: String!
+  description: String!
+  startDate: DateTime!
+  duration: Int!
+  endDate: DateTime!
+  agreementStartDate: DateTime!
+  agreementDuration: Int!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Tender {
   tenderId: ID!
   managerId: String!
@@ -56,21 +97,27 @@ type Tender {
   startDate: DateTime!
   duration: Int!
   endDate: DateTime!
+  agreementStartDate: DateTime!
+  agreementDuration: Int!
   manager: Manufacturer!
   forMaterial: Material!
-  quotations: [TenderQuote!]!
+  proposals: [Proposal!]!
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-type TenderQuote {
-  vendorId: ID!
+type AgreementHollow {
   tenderId: ID!
-  amount: Int!
-  deliveredByVendor: Boolean!
+  vendorId: ID!
+  startDate: DateTime!
+  duration: Int!
+  endDate: DateTime!
+}
+
+type Agreement {
+  tenderId: ID!
+  vendorId: ID!
+  startDate: DateTime!
+  duration: Int!
+  endDate: DateTime!
 }
 
 type Query {
@@ -80,8 +127,18 @@ type Query {
 }
 
 type Mutation {
-  login(loginInput: UserLoginInput!): UserHollow!
-  registerManufacturer(userInput: UserInput!, manufacturerInput: ManufacturerInput!): UserHollow!
+  createProduct(product: ProductInput!): ProductHollow!
+  login(login: UserLoginInput!): UserHollow!
+  registerManufacturer(user: UserInput!, manufacturer: ManufacturerInput!): UserHollow!
+  registerVendor(user: UserInput!, vendor: VendorInput!): UserHollow!
+  createAgreement(agreement: AgreementInput!): AgreementHollow!
+  createTender(tender: TenderInput!): TenderHollow!
+  createProposal(proposal: ProposalInput!): ProposalHollow!
+  createMaterial(material: MaterialInput!): MaterialHollow!
+}
+
+input ProductInput {
+  materialName: String!
 }
 
 input UserLoginInput {
@@ -98,4 +155,33 @@ input UserInput {
 
 input ManufacturerInput {
   companyName: String!
+}
+
+input VendorInput {
+  companyName: String!
+}
+
+input AgreementInput {
+  tenderId: String!
+  vendorId: String!
+  startDate: DateTime!
+  duration: Float!
+}
+
+input TenderInput {
+  startDate: DateTime!
+  duration: Float!
+  agreementStartDate: DateTime!
+  agreementDuration: Float!
+  materialName: String!
+}
+
+input ProposalInput {
+  tenderId: String!
+  amount: Float!
+  deliveredByVendor: Boolean!
+}
+
+input MaterialInput {
+  name: String!
 }

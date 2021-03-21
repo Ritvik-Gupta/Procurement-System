@@ -1,0 +1,32 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"lib": ["esnext"],
+		"module": "CommonJS",
+		"moduleResolution": "node",
+		"allowJs": true,
+		"jsx": "preserve",
+		"noImplicitAny": true,
+		"sourceMap": false,
+		"downlevelIteration": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"allowSyntheticDefaultImports": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"removeComments": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"noUncheckedIndexedAccess": true,
+		"baseUrl": "./",
+		"strictPropertyInitialization": true,
+		"noEmit": true
+	},
+	"exclude": ["node_modules"],
+	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+}
