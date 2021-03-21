@@ -16,7 +16,7 @@ We automatically embed agreement once the auction room is closed using blockchai
 
 ## Getting Started
 
-Run < npm install > to install all the npm dependencies
+Run *npm install* to install all the npm dependencies
 
 ```bash
 
@@ -27,7 +27,7 @@ npm install
 
 ## Client Terminal
 
-In the client terminal type < npm run dev > for development mode server on PORT 3000
+In the client terminal type *npm run dev* for development mode server on PORT 3000
 
 First, run the development server:
 
@@ -42,7 +42,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Server Terminal
 
 
-In the server terminal type < npm run start:dev > for development mode server on PORT 4000
+In the server terminal type *npm run start:dev* for development mode server on PORT 4000
 
 ```bash
 
@@ -52,6 +52,8 @@ npm run start:dev
 
 
 Open [http://localhost:4000](http://localhost:4000) with your browser to see the result.
+
+
 
 
 
